@@ -39,6 +39,16 @@ class Reporter {
     console.log('KEY RATIOS:')
     console.log(table.toString());
   }
+
+  static printLongestSinceEvaluated(data) {
+    const table = new Table({
+      head: ['Flag key', 'Time since last evaluation']
+    });
+    table.push(...data);
+
+    console.log('FLAGS BY TIME SINCE LAST EVALUATION:');
+    console.log(table.toString());
+  }
 }
 
 module.exports = Reporter;

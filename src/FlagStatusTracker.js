@@ -60,13 +60,14 @@ class FlagStatusTracker {
     flagsCopy.sort(this.lastRequestedSort);
 
     const lastNFlags = flagsCopy.slice(0, num);
+    const lastNFlagsArray = [];
 
-    console.log('FLAGS BY TIME SINCE LAST EVALUATION:');
     for (let i of lastNFlags) {
-      const timeReadable = i.lastRequested == null ? 'no data' : formatRelative(new Date(i.lastRequested), new Date())
-      console.log(`${i.key}\t\t\t${timeReadable}`)
+      const timeReadable = i.lastRequested == null ? 'no data' : formatRelative(new Date(i.lastRequested), new Date());
+      lastNFlagsArray.push([i.key, timeReadable]);
     }
-    this.skipLine();
+
+    Reporter.printLongestSinceEvaluated(lastNFlagsArray);
   }
 
   // Utility methods

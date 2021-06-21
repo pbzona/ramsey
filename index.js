@@ -13,7 +13,7 @@ var callback = function(error, data) {
     Tracker.processFlags(data)
     Tracker.printSummary();
     Tracker.printRatios();
-    //Tracker.printTimeSinceLastRequest(10); //Configure number of results to show here
+    Tracker.printTimeSinceLastRequest(5); //Configure number of results to show here
   }
 };
 
