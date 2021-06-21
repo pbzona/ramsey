@@ -36,7 +36,7 @@ class Reporter {
     });
     table.push(...data);
 
-    console.log('KEY RATIOS:')
+    console.log('STATUS RATIOS:')
     console.log(table.toString());
   }
 
