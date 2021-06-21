@@ -71,10 +71,6 @@ class FlagStatusTracker {
   }
 
   // Utility methods
-  skipLine() {
-    console.log('');
-  }
-
   getFlagKey(href) {
     return href.split('/').slice(-1).pop()
   }
