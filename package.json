@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "report": "node index.js",
+    "actions": "echo 'Not yet implemented!!!'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
