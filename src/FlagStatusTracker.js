@@ -1,5 +1,6 @@
 var formatRelative = require('date-fns/formatRelative')
 const Flag = require('./Flag');
+const Reporter = require('./Reporter');
 
 class FlagStatusTracker {
   constructor() {
@@ -31,20 +32,17 @@ class FlagStatusTracker {
   }
 
   printSummary() {
-    console.log(`PROJECT: ${process.env.LD_PROJECT_KEY}`);
-    console.log(`- Total flags:\t ${this.total}`);
-    this.skipLine();
-    console.log(`ENVIRONMENT: ${process.env.LD_ENVIRONMENT_KEY}`);
-    console.log(`- New:\t\t${this.summarize(this.new)}`);
-    console.log(`- Active:\t${this.summarize(this.active)}`);
-    console.log(`- Launched:\t${this.summarize(this.launched)}`);
-    console.log(`- Inactive:\t${this.summarize(this.inactive)}`);
-    this.skipLine()
-  }
+    Reporter.printOverview({
+      project: process.env.LD_PROJECT_KEY,
+      flags: this.total
+    });
 
-  summarize(flagStat) {
-    const percentage = (flagStat / this.total).toFixed(2) * 100;
-    return `${percentage}%\t(${flagStat})`;
+    Reporter.printEnvFlagStats({
+      new: ['New', this.new, this.getPercent(this.new)],
+      active: ['Active', this.active, this.getPercent(this.active)],
+      launched: ['Launched', this.launched, this.getPercent(this.launched)],
+      inactive: ['Inactive', this.inactive, this.getPercent(this.inactive)]
+    });
   }
 
   printRatios() {
@@ -75,6 +73,10 @@ class FlagStatusTracker {
 
   getFlagKey(href) {
     return href.split('/').slice(-1).pop()
+  }
+
+  getPercent(flagStat) {
+    return `${(flagStat / this.total).toFixed(2) * 100}%`;
   }
 
   lastRequestedSort(a, b) {
