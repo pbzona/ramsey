@@ -11,9 +11,7 @@ var callback = function(error, data) {
     process.exit(1);
   } else {
     Tracker.processFlags(data)
-    Tracker.printSummary();
-    Tracker.printRatios();
-    Tracker.printTimeSinceLastRequest(5); //Configure number of results to show here
+    Tracker.printReports();
   }
 };
 

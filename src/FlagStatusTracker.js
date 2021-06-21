@@ -12,6 +12,7 @@ class FlagStatusTracker {
     this.total = 0;
 
     this.flags = []
+    this.flagsToShow = 5; // Controls the number of flags to show in time since last evaluated
   }
 
   processFlags(statusData) {
@@ -68,6 +69,12 @@ class FlagStatusTracker {
     }
 
     Reporter.printLongestSinceEvaluated(lastNFlagsArray);
+  }
+
+  printReports() {
+    this.printSummary();
+    this.printRatios();
+    this.printTimeSinceLastRequest(this.flagsToShow);
   }
 
   // Utility methods
