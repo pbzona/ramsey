@@ -1,4 +1,5 @@
-var Table = require('cli-table');
+const chalk = require('chalk');
+const Table = require('cli-table');
 
 class Reporter {
   constructor() {
@@ -12,6 +13,7 @@ class Reporter {
       {'Total flags': data.flags}
     )
 
+    printTableHeader('PROJECT SUMMARY');
     console.log(table.toString())
   }
 
@@ -26,7 +28,7 @@ class Reporter {
       [...data.inactive]
     );
 
-    console.log('ENVIRONMENT STATUS REPORT:');
+    printTableHeader('ENVIRONMENT STATUS REPORT');
     console.log(table.toString());
   }
 
@@ -36,7 +38,7 @@ class Reporter {
     });
     table.push(...data);
 
-    console.log('STATUS RATIOS:')
+    printTableHeader('STATUS RATIOS');
     console.log(table.toString());
   }
 
@@ -46,9 +48,13 @@ class Reporter {
     });
     table.push(...data);
 
-    console.log('FLAGS BY TIME SINCE LAST EVALUATION:');
+   printTableHeader('FLAGS BY TIME SINCE LAST EVALUATION');
     console.log(table.toString());
   }
+}
+
+function printTableHeader(text) {
+  console.log(chalk.green(text));
 }
 
 module.exports = Reporter;
