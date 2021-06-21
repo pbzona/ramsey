@@ -46,10 +46,13 @@ class FlagStatusTracker {
   }
 
   printRatios() {
-    console.log('FLAG RATIOS:');
-    console.log(`Launched to Active: ${(this.launched / this.active).toFixed(2)}`);
-    console.log(`Inactive to Active: ${(this.inactive / this.active).toFixed(2)}`);
-    this.skipLine()
+    const launchedToActive = (this.launched / this.active).toFixed(2);
+    const inactiveToActive = (this.inactive / this.active).toFixed(2);
+
+    Reporter.printRatios([
+      ['Launched to active', launchedToActive],
+      ['Inactive to active', inactiveToActive]
+    ])
   }
 
   printTimeSinceLastRequest(num) {

@@ -29,6 +29,16 @@ class Reporter {
     console.log('ENVIRONMENT STATUS REPORT:');
     console.log(table.toString());
   }
+
+  static printRatios(data) {
+    const table = new Table({
+      head: ['Metric', 'Ratio']
+    });
+    table.push(...data);
+
+    console.log('KEY RATIOS:')
+    console.log(table.toString());
+  }
 }
 
 module.exports = Reporter;
