@@ -7,19 +7,20 @@ class Reporter {
   }
 
   static printOverview(data) {
-    const table = new Table()
+    const table = new Table();
     table.push(
-      {'Project': data.project},
-      {'Total flags': data.flags}
-    )
+      { Project: data.project },
+      { Environment: data.environment },
+      { 'Total flags': data.flags }
+    );
 
     printTableHeader('PROJECT SUMMARY');
-    console.log(table.toString())
+    console.log(table.toString());
   }
 
   static printEnvFlagStats(data) {
-    const table = new Table({ 
-      head: ['Flag Status', 'Count', '% of Total']
+    const table = new Table({
+      head: ['Flag Status', 'Count', '% of Total'],
     });
     table.push(
       [...data.new],
@@ -34,7 +35,7 @@ class Reporter {
 
   static printRatios(data) {
     const table = new Table({
-      head: ['Metric', 'Ratio']
+      head: ['Metric', 'Ratio'],
     });
     table.push(...data);
 
@@ -44,7 +45,7 @@ class Reporter {
 
   static printLongestSinceEvaluated(data) {
     const table = new Table({
-      head: ['Flag key', 'Time since last evaluation']
+      head: ['Flag key', 'Time since last evaluation'],
     });
     table.push(...data);
 
