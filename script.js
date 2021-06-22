@@ -4,7 +4,7 @@ const Table = require('./src/Table');
 // Configure the client
 const LDClient = LaunchDarklyApi.ApiClient.instance;
 const Token = LDClient.authentications['Token'];
-Token.apiKey = 'api-fec18196-0288-4ddf-a1cc-61047e8cfd7e';
+Token.apiKey = '';
 
 // Retrieve configuration options
 const projectKey = 'support-service';
