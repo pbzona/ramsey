@@ -48,7 +48,7 @@ class Reporter {
     });
     table.push(...data);
 
-   printTableHeader('FLAGS BY TIME SINCE LAST EVALUATION');
+    printTableHeader('FLAGS BY TIME SINCE LAST EVALUATION');
     console.log(table.toString());
   }
 }
