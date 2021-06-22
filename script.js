@@ -1,4 +1,5 @@
 const LaunchDarklyApi = require('launchdarkly-api');
+const Table = require('./src/Table');
 
 // Configure the client
 const LDClient = LaunchDarklyApi.ApiClient.instance;
@@ -24,3 +25,13 @@ var callback = function (error, data) {
 };
 
 ffApi.getFeatureFlagStatuses(projectKey, environmentKey, callback);
+
+// ========
+
+const t = new Table(['col 1', 'col 2']);
+
+t.push(['val a', 'val b']);
+const renderedTable = t.render();
+
+const div = document.getElementById('table-div');
+div.appendChild(renderedTable);
