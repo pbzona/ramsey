@@ -1,4 +1,4 @@
-class ActionGenerator {
+class Recommender {
   // Compile a list of flags to be reviewed
   // Get data for each flag (individual api call)
   // Show:
