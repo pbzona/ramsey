@@ -1,8 +1,8 @@
-const LaunchDarklyApi = require('launchdarkly-api');
+const LaunchDarklyApi = require("launchdarkly-api");
 
 // Configure the client
 const LDClient = LaunchDarklyApi.ApiClient.instance;
-const Token = LDClient.authentications['Token'];
+const Token = LDClient.authentications["Token"];
 Token.apiKey = process.env.LD_API_KEY;
 
 // Retrieve configuration options
@@ -15,5 +15,5 @@ const ffApi = new LaunchDarklyApi.FeatureFlagsApi();
 module.exports = {
   projectKey,
   environmentKey,
-  FF: ffApi
-}
+  FF: ffApi,
+};

@@ -1,16 +1,17 @@
-require('dotenv').config()
+require('dotenv').config();
 const LD = require('./src/LD');
 const FlagStatusTracker = require('./src/FlagStatusTracker');
+const Reporter = require('./src/Reporter');
 
 // Configure the flag tracker
 const Tracker = new FlagStatusTracker();
 
-var callback = function(error, data) {
+var callback = function (error, data) {
   if (error) {
     console.error(error);
     process.exit(1);
   } else {
-    Tracker.processFlags(data)
+    Tracker.processFlags(data);
     Tracker.printReports();
   }
 };
