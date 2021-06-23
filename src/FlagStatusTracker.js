@@ -1,6 +1,7 @@
 var formatRelative = require('date-fns/formatRelative');
 const Flag = require('./Flag');
 const Reporter = require('./Reporter');
+const Table = require('./Table');
 
 class FlagStatusTracker {
   constructor() {
@@ -41,12 +42,22 @@ class FlagStatusTracker {
       flags: this.total,
     });
 
-    Reporter.printEnvFlagStats({
-      new: ['New', this.new, this.getPercent(this.new)],
-      active: ['Active', this.active, this.getPercent(this.active)],
-      launched: ['Launched', this.launched, this.getPercent(this.launched)],
-      inactive: ['Inactive', this.inactive, this.getPercent(this.inactive)],
-    });
+    // Reporter.printEnvFlagStats({
+    //   new: ['New', this.new, this.getPercent(this.new)],
+    //   active: ['Active', this.active, this.getPercent(this.active)],
+    //   launched: ['Launched', this.launched, this.getPercent(this.launched)],
+    //   inactive: ['Inactive', this.inactive, this.getPercent(this.inactive)],
+    // });
+    const t = new Table(['Flag status', 'Count', '% of total']);
+    t.push(['New', this.new, this.getPercent(this.new)]);
+
+    t.push(['Active', this.active, this.getPercent(this.active)]);
+    t.push(['Launched', this.launched, this.getPercent(this.launched)]);
+    t.push(['Inactive', this.inactive, this.getPercent(this.inactive)]);
+
+    const renderedTable = t.render();
+
+    document.getElementById('env-status-table').appendChild(renderedTable);
   }
 
   printRatios() {
