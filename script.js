@@ -31,6 +31,8 @@ ffApi.getFeatureFlagStatuses(projectKey, environmentKey, callback);
 const t = new Table(['col 1', 'col 2']);
 
 t.push(['val a', 'val b']);
+t.push(['val a', 'val b']);
+t.push(['val a', 'val b']);
 const renderedTable = t.render();
 
 const div = document.getElementById('table-div');

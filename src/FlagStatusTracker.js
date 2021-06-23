@@ -80,7 +80,7 @@ class FlagStatusTracker {
   printReports() {
     this.printSummary();
     this.printRatios();
-    this.printTimeSinceLastRequest(this.flagsToShow);
+    //this.printTimeSinceLastRequest(this.flagsToShow);
   }
 
   // Utility methods
