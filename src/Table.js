@@ -10,12 +10,20 @@ function Table(columns) {
 
   table.render = function () {
     let tEl = document.createElement('table');
+    tEl.classList.add('table', 'table-bordered');
+
+    let theadEl = document.createElement('thead');
     let thEl = document.createElement('tr');
-    tEl.appendChild(thEl);
+    tEl.appendChild(theadEl);
+    theadEl.appendChild(thEl);
+
+    let tbodyEl = document.createElement('tbody');
+    tEl.appendChild(tbodyEl);
 
     this.columns.forEach((colName) => {
       let tdEl = document.createElement('th');
       tdEl.innerText = colName;
+      tdEl.setAttribute('scope', 'col');
       thEl.appendChild(tdEl);
     });
 
@@ -26,7 +34,7 @@ function Table(columns) {
         tdEl.innerText = val;
         trEl.appendChild(tdEl);
       });
-      tEl.appendChild(trEl);
+      tbodyEl.appendChild(trEl);
     });
     return tEl;
   };
