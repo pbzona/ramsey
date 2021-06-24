@@ -1,8 +1,11 @@
 class Flag {
-  constructor(key, lastRequested, status) {
+  constructor(key, name, creationDate, temporary) {
+    this.name = name;
     this.key = key;
-    this.lastRequested = lastRequested;
-    this.status = status;
+    this.creationDate = creationDate;
+    this.temporary = temporary;
+    this.lastRequested = null;
+    this.status = null;
   }
 }
 

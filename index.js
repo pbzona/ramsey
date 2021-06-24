@@ -1,21 +1,12 @@
 const LD = require('./src/LD');
-const FlagStatusTracker = require('./src/FlagStatusTracker');
-const Reporter = require('./src/Reporter');
-const Table = require('./src/Table');
+const FlagProcessor = require('./src/FlagProcessor');
 const populateSummary = require('./src/Summary');
 
 // Configure the flag tracker
-const Tracker = new FlagStatusTracker();
+const Processor = new FlagProcessor({
+  client: LD,
+  project: LD.projectKey,
+  environment: LD.environmentKey,
+});
 
-var callback = function (error, data) {
-  if (error) {
-    console.error(error);
-  } else {
-    Tracker.processFlags(data);
-
-    populateSummary(LD.projectKey, LD.environmentKey, Tracker.total);
-    Tracker.printReports();
-  }
-};
-
-LD.FF.getFeatureFlagStatuses(LD.projectKey, LD.environmentKey, callback);
+Processor.init();

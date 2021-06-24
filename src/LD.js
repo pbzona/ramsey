@@ -6,8 +6,8 @@ const Token = LDClient.authentications['Token'];
 Token.apiKey = '';
 
 // Retrieve configuration options
-const projectKey = process.env.LD_PROJECT_KEY;
-const environmentKey = process.env.LD_ENVIRONMENT_KEY;
+const projectKey = 'support-service';
+const environmentKey = 'pzona';
 
 // Define the object to export
 const ffApi = new LaunchDarklyApi.FeatureFlagsApi();
