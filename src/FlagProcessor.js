@@ -1,4 +1,5 @@
 const Flag = require('./Flag');
+const PriorityController = require('./PriorityController');
 
 class FlagProcessor {
   constructor(config) {
@@ -14,7 +15,10 @@ class FlagProcessor {
     this.total = 0;
 
     this.flags = {};
+    this.flagList = [];
     this.flagsToShow = 5; // Controls the number of flags to show in time since last evaluated
+
+    this.priorityController = new PriorityController();
 
     this.getAllFlags = this.getAllFlags.bind(this);
     this.processAllFlags = this.processAllFlags.bind(this);
@@ -42,8 +46,8 @@ class FlagProcessor {
       throw new Error(err);
     } else {
       for (let flag of data.items) {
-        let { key, name, creationDate, temporary } = flag;
-        let f = new Flag(key, name, creationDate, temporary);
+        let { key, name, creationDate, temporary, tags } = flag;
+        let f = new Flag(key, name, new Date(creationDate), temporary, tags);
         this.flags[key] = f;
       }
       this.getAllFlagStatuses();
@@ -70,11 +74,23 @@ class FlagProcessor {
       for (let flag of data.items) {
         const key = getFlagKey(flag.links.parent.href);
         this.flags[key].status = flag.name;
-        this.flags[key].lastRequested = flag.lastRequested;
+        this.flags[key].lastRequested = new Date(flag.lastRequested);
       }
 
-      console.log(this.flags);
+      this.convertFlagList();
     }
+  }
+
+  convertFlagList() {
+    for (let key in this.flags) {
+      this.flagList.push(this.flags[key]);
+    }
+    this.priorityController.provideFlags(this.flagList);
+    this.priorityController.applyRules();
+  }
+
+  getFlagList() {
+    return this.flagList;
   }
 }
 

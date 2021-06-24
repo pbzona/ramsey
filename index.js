@@ -1,6 +1,7 @@
 const LD = require('./src/LD');
 const FlagProcessor = require('./src/FlagProcessor');
-const populateSummary = require('./src/Summary');
+// const populateSummary = require('./src/Summary');
+const PriorityController = require('./src/PriorityController');
 
 // Configure the flag tracker
 const Processor = new FlagProcessor({
@@ -10,3 +11,13 @@ const Processor = new FlagProcessor({
 });
 
 Processor.init();
+
+// let Prioritizer;
+
+// while (!Processor.checkReadiness()) {
+//   try {
+//     Prioritizer = new PriorityController(Processor.getFlagList());
+//   } catch (err) {
+//     console.error(err);
+//   }
+// }
