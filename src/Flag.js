@@ -10,6 +10,7 @@ class Flag {
     this._status = null;
     this.tags = tags;
     this.priority = 0;
+    this.codeRefs = 0;
   }
 
   set status(val) {
@@ -17,6 +18,11 @@ class Flag {
       this.priority += 100;
     } else if (val === 'launched') {
       this.priority += 50;
+    } else if (val === 'new') {
+      this.priority += 20;
+
+      let weeksSinceCreated = Math.floor(millisecondsToHours(now - val) / 168);
+      this.priority += Math.pow(weeksSinceCreated, 2);
     }
 
     this._status = val;

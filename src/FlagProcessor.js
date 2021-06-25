@@ -1,5 +1,6 @@
 const Flag = require('./Flag');
 const PriorityController = require('./PriorityController');
+const fetch = require('node-fetch');
 
 class FlagProcessor {
   constructor(config) {
@@ -24,6 +25,7 @@ class FlagProcessor {
     this.processAllFlags = this.processAllFlags.bind(this);
     this.getAllFlagStatuses = this.getAllFlagStatuses.bind(this);
     this.processAllFlagStatuses = this.processAllFlagStatuses.bind(this);
+    this.getAllCodeRefs = this.getAllCodeRefs.bind(this);
   }
 
   init() {
@@ -77,8 +79,32 @@ class FlagProcessor {
         this.flags[key].lastRequested = new Date(flag.lastRequested);
       }
 
-      this.convertFlagList();
+      this.getAllCodeRefs();
     }
+  }
+
+  getAllCodeRefs() {
+    const url =
+      'https://app.launchdarkly.com/api/v2/code-refs/statistics/support-service';
+    const options = {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'LD-API-Version': 'beta',
+        Authorization: '',
+      },
+    };
+
+    fetch(url, options)
+      .then((res) => res.json())
+      .then((json) => {
+        for (let flag in json.flags) {
+          this.flags[flag].codeRefs = json.flags[flag][0]['hunkCount'];
+        }
+      })
+      .catch((err) => console.error('error:' + err));
+
+    this.convertFlagList();
   }
 
   convertFlagList() {
