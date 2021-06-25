@@ -10,7 +10,7 @@ class Flag {
     this._status = null;
     this.tags = tags;
     this.priority = 0;
-    this.codeRefs = 0;
+    this._codeRefs = 0;
   }
 
   set status(val) {
@@ -38,10 +38,17 @@ class Flag {
     this.timeSinceLastRequested = Math.floor(
       millisecondsToHours(now - val) / 168
     ); // Number of weeks since last requested;
+
+    this.priority += 2 * Math.pow(this.timeSinceLastRequested, 2);
   }
 
   get lastRequested() {
     return this._lastRequested;
+  }
+
+  set codeRefs(val) {
+    this._codeRefs = val;
+    this.priority -= val * 3;
   }
 }
 
